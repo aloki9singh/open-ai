@@ -20,11 +20,9 @@ themecontentRouter.post('/generate-quote', async (req, res) => {
         } else {
             // Add more themes and prompts as needed
         }
-
-        // Use ChatGPT or OpenAI GPT-3 to generate the quote based on the prompt
         const response = await axios.post('https://api.openai.com/v1/engines/davinci/completions', {
             prompt,
-            // Add other parameters as needed
+           
         }, {
             headers: {
                 'Authorization': `Bearer ${OPENAI_KEY}`,

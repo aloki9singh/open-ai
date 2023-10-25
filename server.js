@@ -5,9 +5,8 @@ const cors=require('cors');
 const authRoutes = require('./routes/auth');
 const { connection } = require('./config/db');
 const { OpenAiRouter } = require('./routes/openai');
-const { ResponseRouter } = require('./routes/response');
 const { themecontentRouter } = require('./routes/themecontent');
-const { shayriRouter } = require('./routes/shayri');
+const { shayariRouter } = require('./routes/shayari');
 const { generatequoteRouter } = require('./routes/generatequote');
 const { codeConverter } = require('./routes/codeConvert');
 const app = express();
@@ -20,11 +19,11 @@ app.get("/",(req,res)=>{
 })
 app.use('/auth', authRoutes);
 app.use('/generate',OpenAiRouter)
-app.use ("/response",ResponseRouter)
-app.use ("/codeconverter",codeConverter)
-app.use ("/generatequote", generatequoteRouter)
-app.use ("/shayrigenerator", shayriRouter)
-app.use ("/themedcontent",themecontentRouter)
+
+app.use ("/api1",codeConverter)
+app.use ("/api1", generatequoteRouter)
+app.use ("/api1",shayariRouter)
+app.use ("/api1",themecontentRouter)  
 
 
 app.listen(process.env.PORT,async () => {
