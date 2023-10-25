@@ -11,9 +11,9 @@ app.use(express.json());
 app.use(cors());
 
 // Routes
-app.get("/",(req,res)=>{
-    res.send("Welcome to OPENAI Connection")
-})
+// app.get("/",(req,res)=>{
+//     res.send("Welcome to OPENAI Connection")
+// })
 app.use('/auth', authRoutes);
 app.use('/generate',OpenAiRouter)
 app.use ("response",ResponseRouter)
