@@ -7,7 +7,7 @@ const { connection } = require('./config/db');
 const { OpenAiRouter } = require('./routes/openai');
 const { themecontentRouter } = require('./routes/themecontent');
 const { shayariRouter } = require('./routes/shayari');
-const { generatequoteRouter } = require('./routes/generatequote');
+const { QuoteRouter } = require('./routes/generatequote');
 const { codeConverter } = require('./routes/codeConvert');
 const app = express();
 app.use(express.json());
@@ -17,11 +17,11 @@ app.use(cors());
 app.get("/",(req,res)=>{
     res.send("Welcome to OPENAI Connection")
 })
-app.use('/auth', authRoutes);
-app.use('/generate',OpenAiRouter)
+// app.use('/auth', authRoutes);
+app.use('/api1',OpenAiRouter)
 
 app.use ("/api1",codeConverter)
-app.use ("/api1", generatequoteRouter)
+app.use ("/api1", QuoteRouter)
 app.use ("/api1",shayariRouter)
 app.use ("/api1",themecontentRouter)  
 

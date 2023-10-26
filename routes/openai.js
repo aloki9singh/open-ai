@@ -13,7 +13,7 @@ OpenAiRouter.get('/sayari',async (req,res)=>{
           n: 1
         }, {
           headers: {
-            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+            'Authorization': `Bearer ${process.env.OPENAI_KEY}`,
             'Content-Type': 'application/json'
           }
         });
@@ -22,7 +22,7 @@ OpenAiRouter.get('/sayari',async (req,res)=>{
         res.json({ shayari });
       } catch (error) {
         console.error('Error:', error?.response?.data);
-        res.status(500).json({ error: 'Something went wrong' });
+        res.status(500).json({ error: 'Something went wrong' ,error});
       }
 })
 

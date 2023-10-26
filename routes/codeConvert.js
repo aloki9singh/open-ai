@@ -5,8 +5,8 @@ const  codeConverter = express.Router();
 const OPENAI_KEY = process.env.OPENAI_KEY;
    
 codeConverter.post('/convert-code', async (req, res) => {
-    const { code, sourceLanguage, targetLanguage } = req.body;
-
+    const { code, sourceLanguage, targetLanguage } = req.query;
+ 
     // Create a prompt to convert code from source to target language
     const prompt = `Translate the following ${sourceLanguage} code to ${targetLanguage}:
     ${code}`;
@@ -27,7 +27,7 @@ codeConverter.post('/convert-code', async (req, res) => {
         res.json({ convertedCode });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'An error occurred.' });
+        res.status(500).json({ error: 'An error occurred.',error });
     }
 });
 
