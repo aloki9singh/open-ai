@@ -8,9 +8,12 @@ const { themecontentRouter } = require('./routes/themecontent');
 const { shayariRouter } = require('./routes/shayari');
 const { QuoteRouter } = require('./routes/generatequote');
 const { codeConverter } = require('./routes/codeConvert');
+const { summarizeRouter } = require('./routes/summarize');
 const app = express();
 app.use(express.json());
 app.use(cors());
+const bodyParser = require('body-parser');
+ app.use(bodyParser.json());
 
 // Routes
 app.get("/",(req,res)=>{
@@ -21,6 +24,7 @@ app.use ("/api1", codeConverter)
 app.use ("/api1", QuoteRouter)
 app.use ("/api1",shayariRouter)
 app.use ("/api1",themecontentRouter)  
+app.use ("/api1",summarizeRouter)  
 
 
 app.listen(process.env.PORT,async () => {
