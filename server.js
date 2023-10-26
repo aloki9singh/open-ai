@@ -4,7 +4,6 @@ const express = require('express');
 const cors=require('cors');
 const authRoutes = require('./routes/auth');
 const { connection } = require('./config/db');
-const { OpenAiRouter } = require('./routes/openai');
 const { themecontentRouter } = require('./routes/themecontent');
 const { shayariRouter } = require('./routes/shayari');
 const { QuoteRouter } = require('./routes/generatequote');
@@ -17,10 +16,8 @@ app.use(cors());
 app.get("/",(req,res)=>{
     res.send("Welcome to OPENAI Connection")
 })
-// app.use('/auth', authRoutes);
-app.use('/api1',OpenAiRouter)
-
-app.use ("/api1",codeConverter)
+app.use('/auth', authRoutes);
+app.use ("/api1", codeConverter)
 app.use ("/api1", QuoteRouter)
 app.use ("/api1",shayariRouter)
 app.use ("/api1",themecontentRouter)  

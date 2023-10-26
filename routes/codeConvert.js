@@ -1,21 +1,23 @@
 const express = require('express');
 const axios = require('axios');
 require("dotenv").config();
-const  codeConverter = express.Router();
+const codeConverter = express.Router();
 const OPENAI_KEY = process.env.OPENAI_KEY;
-   
+
 codeConverter.post('/convert-code', async (req, res) => {
-    const { code, sourceLanguage, targetLanguage } = req.query;
- 
-    // Create a prompt to convert code from source to target language
+    const { code, sourceLanguage, targetLanguage } = req.body;
+
+    if (!code || !sourceLanguage || !targetLanguage) {
+        return res.status(400).json({ error: "code, sourceLanguage, and targetLanguage are required query parameters." });
+    }
+
     const prompt = `Translate the following ${sourceLanguage} code to ${targetLanguage}:
-    ${code}`;
+${code}`;
 
     try {
-        // Use the OpenAI API to convert code
         const response = await axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
             prompt,
-            max_tokens: 150, // Adjust as needed
+            max_tokens: 200, 
         }, {
             headers: {
                 'Authorization': `Bearer ${OPENAI_KEY}`,
@@ -27,10 +29,10 @@ codeConverter.post('/convert-code', async (req, res) => {
         res.json({ convertedCode });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'An error occurred.',error });
+        res.status(500).json({ error: 'An error occurred.', error });
     }
 });
 
-module.exports={
+module.exports = {
     codeConverter
-}
+};
