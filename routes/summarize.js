@@ -38,20 +38,20 @@ summarizeRouter.post("/generate-text", async (req, res) => {
   }
 });
 
-// // Text Summarization
-// summarizeRouter.post('/summarize', async (req, res) => {
-//     const { text } = req.body;
-//     const response = await axios.post('https://api.openai.com/v1/engines/davinci/completions', {
-//       prompt: `Summarize: ${text}`,
-//       max_tokens: 50,
-//     }, {
-//       headers: {
-//         Authorization: `Bearer ${OPENAI_KEY}`,
-//       },
-//     });
+// Text Summarization
+summarizeRouter.post('/summarize', async (req, res) => {
+    const { text } = req.body;
+    const response = await axios.post('https://api.openai.com/v1/engines/davinci/completions', {
+      prompt: `Summarize: ${text}`,
+      max_tokens: 50,
+    }, {
+      headers: {
+        Authorization: `Bearer ${OPENAI_KEY}`,
+      },
+    });
 
-//     res.json({ summary: response.data.choices[0].text });
-//   });
+    res.json({ summary: response.data.choices[0].text });
+  });
 
 // Translation
 summarizeRouter.post("/translate", async (req, res) => {

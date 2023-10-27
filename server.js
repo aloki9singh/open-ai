@@ -13,6 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 const bodyParser = require('body-parser');
+const { sentimentRouter } = require('./routes/sentiment');
  app.use(bodyParser.json());
 
 // Routes
@@ -25,6 +26,7 @@ app.use ("/api1", QuoteRouter)
 app.use ("/api1",shayariRouter)
 app.use ("/api1",themecontentRouter)  
 app.use ("/api1",summarizeRouter)  
+app.use ("/v2", sentimentRouter)  
 
 
 app.listen(process.env.PORT,async () => {
